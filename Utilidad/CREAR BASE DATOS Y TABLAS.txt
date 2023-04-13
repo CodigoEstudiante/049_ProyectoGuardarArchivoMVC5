@@ -1,0 +1,18 @@
+﻿create database PRUEBAS
+
+
+USE PRUEBAS
+
+
+CREATE TABLE ARCHIVOS(
+IdArchivo int primary key identity,
+Nombre varchar(100),
+Archivo varbinary(max),
+Extension varchar(50)
+)
+
+
+
+
+select * from ARCHIVOS
+

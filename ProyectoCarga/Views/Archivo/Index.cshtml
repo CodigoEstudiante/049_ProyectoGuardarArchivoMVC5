@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ProyectoCarga.Models.Archivos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*________________________________________________________________*@
+@*COMENTAR TODO EL CONTENIDO - NO BODY -  DE SITE.CSS => Content/Site.css*@
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-primary" style="margin-top:50px">
+            <div class="panel-heading">
+                <h4>Lista Archivos</h4>
+            </div>
+            <div class="panel-body">
+
+                <a class="btn btn-success" href="@Url.Action("Subir","Archivo")">Subir Archivo</a>
+                <hr />
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th style="width:100px"></th>
+                            </tr>
+                        </thead>
+                        @*PRIMERO PINTAR SOLO CON LA EXTENSION - LUEGO AGREGAR LAS IMAGENES - carpeta => descargas/temporal/imagenes*@
+                        <tbody>
+                            @foreach (ProyectoCarga.Models.Archivos item in Model) { 
+                                <tr>
+                                    <td>@item.Nombre</td>
+                                    @*<td>@item.Extension.Replace(".","")</td>*@
+                                    <td>
+                                        @*@Url.Content("~/Imagenes/" + item.Extension.Replace(".", "") + ".png")*@
+                                        <img src="@Url.Content("~/Imagenes/" + item.Extension.Replace(".", "") + ".png")" width="40" />
+                                    </td>
+                                    <td>
+                                        @*<button class="btn btn-sm btn-info" type="submit"> Descargar</button>*@
+
+                                        <form action="@Url.Action("DescargarArchivo","Archivo")" method="post">
+                                            <input name="IdArchivo" type="hidden" value="@item.IdArchivo" />
+                                            <button class="btn btn-sm btn-warning" type="submit"> Descargar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
